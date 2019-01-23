@@ -26,15 +26,15 @@ app.use('/auth',userrouter);
 app.use('/api/books',bookrouter);
 app.use('/api/secretbooks',passport.authenticate('jwt',{session:false}),secretbookrouter);
 
-// app.use((err,req,res)=>{
-//   res.status(err.status||500);
-//   res.json({
-//     error:{
-//       message:err.message,
-//       error:{}
-//     }
-//   });
-// });
+app.use((err,req,res)=>{
+  res.status(err.status||500);
+  res.json({
+    error:{
+      message:err.message,
+      error:{}
+    }
+  });
+});
 
 app.get('/',(req,res)=>{
   res.send('passport test');
