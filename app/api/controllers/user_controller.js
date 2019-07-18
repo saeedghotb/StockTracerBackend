@@ -1,8 +1,13 @@
+/**
+ * user controller 
+ * containing signup and login control functions
+ */
 const usermodel = require('../models/user_model');
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
 module.exports = {
+  //sign up controller
   signup : (req,res,next)=>{
     let params = {
       name : req.body.name,
