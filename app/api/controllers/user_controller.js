@@ -30,6 +30,39 @@ module.exports = {
     })
   },
   login: (req,res,next)=>{
-    console.log('login method');
+    const {username,password} = req.body;
+    if(!username||!password){
+      res.status(400).json({
+        message : "username and password fields are required"
+      })
+    }else{
+      usermodel.findOne({username:username},(err,user)=>{
+        if(err){
+          res.status(400).json({
+            message : "username or password is incorrect"
+          })
+        }else{
+          if(user.isValidPassword(password)){
+            const token = jwt.sign({username},process.env.jwt_key,{
+              algorithm : 'HS256',
+              expiresIn : '72h'
+            })
+            const userInfo = {
+              username : user.username,
+              name : user.name,
+              email : user.email
+            }
+            res.status(200).json({
+              status : "success",
+              data : {user:userInfo,token:token}
+            })
+          }else{
+            res.status(400).json({
+              message : "username or password is incorrect"
+            })
+          }
+        }
+      })
+    }
   }
 }
