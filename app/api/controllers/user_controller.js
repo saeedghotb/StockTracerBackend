@@ -41,7 +41,7 @@ module.exports = {
           res.status(400).json({
             message : "username or password is incorrect"
           })
-        }else{
+        }else if(user){
           if(user.isValidPassword(password)){
             const token = jwt.sign({username},process.env.jwt_key,{
               algorithm : 'HS256',
@@ -61,6 +61,10 @@ module.exports = {
               message : "username or password is incorrect"
             })
           }
+        }else{
+          res.status(400).json({
+            message : "username or password is incorrect"
+          })
         }
       })
     }
