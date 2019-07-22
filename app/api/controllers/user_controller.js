@@ -43,7 +43,8 @@ module.exports = {
           })
         }else if(user){
           if(user.isValidPassword(password)){
-            const token = jwt.sign({username},process.env.jwt_key,{
+            const user_id = user.id;
+            const token = jwt.sign({user_id},process.env.jwt_key,{
               algorithm : 'HS256',
               expiresIn : '72h'
             })
