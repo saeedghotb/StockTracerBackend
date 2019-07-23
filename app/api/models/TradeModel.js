@@ -22,6 +22,12 @@ const tradeSchema = new Schema({
     stoploss : [],
     takeprofit : [],
     risk : number,
+    user_id : {
+        type : String,
+        required : true
+    },
+    images : [],
+    description : ''
 })
 
 module.exports = mongoose.model('Trades',tradeSchema)
