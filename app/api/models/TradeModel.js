@@ -8,6 +8,7 @@ const tradeSchema = new Schema({
         required : true
     },
     instrument_id : {
+        type : String,
         required : true
     },
     buy_price : Number,
@@ -18,16 +19,32 @@ const tradeSchema = new Schema({
     buy_date : String,
     percentage_of_equity_at_time: Number,
     //stores each sell information
-    sellOffs : [],
+    sellOffs : [{
+        sell_price : {
+            type : Number,
+            required : true
+        },
+        sell_amount : {
+            type : String,
+        },
+        sell_amount : {
+            type : Number,
+            required : true
+        }
+    }],
     stoploss : [],
     takeprofit : [],
-    risk : number,
+    risk : Number,
     user_id : {
         type : String,
         required : true
     },
-    images : [],
-    description : ''
+    images : [{
+        image : String,
+        date : String,
+        description : String
+    }],
+    description : String
 })
 
 module.exports = mongoose.model('Trades',tradeSchema)

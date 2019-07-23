@@ -7,6 +7,7 @@ const app = express();
 
 const userrouter = require('./routes/user_route');
 const moneyRouter = require('./routes/moneyRouter');
+const tradeRouter = require('./routes/trade_routes');
 
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(bodyParser.json());
@@ -18,6 +19,7 @@ app.use(cors())
 
 app.use('/auth',userrouter);
 app.use('/money',validateUser,moneyRouter)
+app.use('/trade',validateUser,tradeRouter)
 
 app.get('/',(req,res)=>{
   res.send('stocktracer REST-API backend, try reading the non provided documentation! ("suck it!")');
