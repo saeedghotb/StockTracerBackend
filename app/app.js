@@ -7,8 +7,6 @@ const app = express();
 
 const userrouter = require('./routes/user_route');
 const moneyRouter = require('./routes/moneyRouter');
-// const bookrouter = require('./routes/book_route');
-// const secretbookrouter = require('./routes/secret_books');
 
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(bodyParser.json());
@@ -17,14 +15,9 @@ require('./config/mongodb');
 
 var cors = require('cors');
 app.use(cors())
-// mongoose.set('debug',false);
-app.use((req,res,next)=>{
-  console.log('request to server');
-  next();
-});
+
 app.use('/auth',userrouter);
 app.use('/money',validateUser,moneyRouter)
-// app.use('/api/books',bookrouter);
 
 app.get('/',(req,res)=>{
   res.send('stocktracer REST-API backend, try reading the non provided documentation! ("suck it!")');
