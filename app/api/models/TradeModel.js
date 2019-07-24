@@ -41,8 +41,10 @@ const tradeSchema = new Schema({
     },
     images : [{
         image : String,
-        date : String,
-        description : String
+        save_date : String,
+        due_date : String,
+        description : String,
+        tradeId : String
     }],
     description : String
 })
