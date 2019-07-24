@@ -1,8 +1,21 @@
 const TradeModel = require('../../models/TradeModel');
+const ImageActions = require('../../../Helpers/SaveImage');
 
 module.exports = {
     addImage : (req,res,err)=>{
-        TradeModel.findByIdAndUpdate(req.body.tradeId,{$push: {images:req.body}},{new: true},(err,trade)=>{
+        const image = ImageActions.getImage(req.body.image)
+        const randomImageName = Math.floor(Math.random()*98400000);
+        require('fs').writeFile('./uploadimages/'+randomImageName+'.'+image.type.split('/')[1],image.data,(err,res)=>{
+            
+        })
+        const imagedata = {
+            image : randomImageName+"."+image.type.split('/')[1],
+            description : req.body.description,
+            tradeId : req.body.tradeId,
+            save_date : req.body.date,
+            due_date : req.body.due_date
+        }
+        TradeModel.findByIdAndUpdate(req.body.tradeId,{$push: {images:imagedata}},{new: true},(err,trade)=>{
             if(err){
                 res.status(404).json({
                     message : err.message,
