@@ -9,7 +9,7 @@ const userrouter = require('./routes/user_route');
 const moneyRouter = require('./routes/moneyRouter');
 const tradeRouter = require('./routes/trade_routes');
 
-app.use(bodyParser.urlencoded({extended : false}));
+app.use(bodyParser.urlencoded({extended : false,limit:5000000}));
 app.use(bodyParser.json());
 require('./config/mongodb');
 // app.use(express.static(path.join(__dirname, 'public')));
